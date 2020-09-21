@@ -66,7 +66,10 @@ LOGGING = {
 # setup database for production
 import dj_database_url
 db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+#DATABASES['default'].update(db_from_env)
+DATABASES['default'] = dj_database_url.config(default='postgres://...')
 #DATABASES['default']['CONN_MAX_AGE'] = 500
 
 ALLOWED_HOSTS = ['https://ditook.herokuapp.com','www.ditook.com','ditook.com','45.120.149.226']
+import django_heroku
+django_heroku.settings(locals())
