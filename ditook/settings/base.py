@@ -107,6 +107,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ditook.wsgi.application'
 
+# database for local and production
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
