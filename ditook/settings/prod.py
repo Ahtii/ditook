@@ -25,45 +25,45 @@ EMAIL_HOST_USER = 'ditookweb@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT = 587
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'standard' : {
-            'format' : '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
-        },
-    },
-    'handlers': {
-        'default':{
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename':'logs/ditook.log',
-            'maxBytes': 1024*1024*5, 
-            'backupCount': 5,
-            'formatter': 'standard'
-        },
-        'server_errors':{
-            'level': 'ERROR',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename':'logs/ditook_critical.log',
-            'maxBytes': 1024*1024*5, 
-            'backupCount': 5,
-            'formatter': 'standard'  
-        }
-    },
-    'loggers':{
-        '': {
-            'handlers': ['default'],
-            'level':'DEBUG',
-            'propagate': True
-        },
-        'django.request': {
-            'handlers': ['server_errors'],
-            'level':'ERROR',
-            'propagate': False  
-        }
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': True,
+#     'formatters': {
+#         'standard' : {
+#             'format' : '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+#         },
+#     },
+#     'handlers': {
+#         'default':{
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename':'logs/ditook.log',
+#             'maxBytes': 1024*1024*5, 
+#             'backupCount': 5,
+#             'formatter': 'standard'
+#         },
+#         'server_errors':{
+#             'level': 'ERROR',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename':'logs/ditook_critical.log',
+#             'maxBytes': 1024*1024*5, 
+#             'backupCount': 5,
+#             'formatter': 'standard'  
+#         }
+#     },
+#     'loggers':{
+#         '': {
+#             'handlers': ['default'],
+#             'level':'DEBUG',
+#             'propagate': True
+#         },
+#         'django.request': {
+#             'handlers': ['server_errors'],
+#             'level':'ERROR',
+#             'propagate': False  
+#         }
+#     }
+# }
 
 # database for production
 
