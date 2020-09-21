@@ -65,6 +65,19 @@ LOGGING = {
     }
 }
 
+# database for production
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ditook',                      
+        'USER': 'postgres',
+        'PASSWORD': 'wmd_9906',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
 # setup database for production
 import dj_database_url
 db_from_env = dj_database_url.config()

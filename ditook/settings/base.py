@@ -107,7 +107,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ditook.wsgi.application'
 
-# database for local and production
+# database for local
 
 DATABASES = {
     'default': {
