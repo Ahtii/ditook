@@ -85,5 +85,3 @@ DATABASES['default'].update(db_from_env)
 #DATABASES['default']['CONN_MAX_AGE'] = 500
 
 ALLOWED_HOSTS = ['https://ditook.herokuapp.com','www.ditook.com','ditook.com','45.120.149.226']
-import django_heroku
-django_heroku.settings(locals())
