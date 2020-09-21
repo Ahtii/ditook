@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google'
 ]
 
-HOME_PAGE = 'www.127.0.0.1'
+#HOME_PAGE = 'www.127.0.0.1'
 
 USE_TZ = True
 
@@ -114,7 +114,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'wmd_9906',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
