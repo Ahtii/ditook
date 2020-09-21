@@ -1,0 +1,16 @@
+ {% load staticfiles %}
+<html>
+<head>
+  <title>Your Website Title</title> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">   
+</head>
+<body>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>   
+    function share_link(){
+        window.open('https://plus.google.com/share?url=https://en.wikipedia.org/wiki/Blog','', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');        
+    }                     
+</script>
+<i class="fa fa-google-plus" onclick="share_link();"></i>
+</body>
+</html>

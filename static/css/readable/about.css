@@ -1,0 +1,73 @@
+
+.about_body {
+	color: rgb(32, 42, 62);
+	font-family: "Arial";
+	font-size: 16px;
+}
+
+.about_q .fa, .about_q p, .about_a .fa, .about_a p {
+	display: inline;
+}
+
+.about_q .fa, .about_a .fa { color: teal; }
+
+.about_q_seperator {
+	height: 1px;
+	background-color: teal;	
+}
+
+.about_a {
+	font-size: 15px;
+}
+
+#article_section { color: teal; font-weight: bold; }
+#article_section:hover { color: rgb(0, 180, 180); }
+.developer {
+	position: relative;
+	text-align: center;
+	color: white;
+}
+
+.developer-name:hover {
+	text-decoration: none;
+}
+
+.name-seperator {
+	height: 1px;
+	background-color: gray;
+	width: 60px;
+}
+
+.developer-img {
+	width: 150px;
+	height: 150px;
+	box-shadow: 0px 0px 10px rgb(32, 42, 62);
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.developer-saying {
+	position: relative;
+	padding-left: 15%;
+	padding-right: 15%;
+	text-align: center;
+}
+
+.row.no-gutter {
+	margin-right: 0px;	
+}
+
+.adjustContent { padding: 0; }
+
+.adjustContent dl dd { margin-left: 50px; margin-top: -20px; }
+
+.edit_date { 
+	font-size: 14px; 
+	font-weight: bold; 
+	font-family: "Arial"; 
+	float: right;
+	color: rgb(62, 72, 92); 
+}
+
+.footer-speretor { height: 0.5px; background-color: teal; }

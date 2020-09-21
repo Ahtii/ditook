@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="row commentStyle">
+		<input id='comment_id' type="hidden" value="{{ comment.id }}" readonly>
+		<div class="{% if comment.parent %} col-xs-offset-1 {% endif %} col-xs-10 commentSection">		
+			<span class="userName"> {{ comment.user }} <a href="#"></a></span>
+			{% if request.user.is_authenticated %}
+			{% if request.user == comment.user %}
+			<p class="comment-edit"><i class="fa fa-edit"></i></p>
+			<p class="comment-del"><i class="fa fa-trash"></i></p>
+			{% endif %}
+			{% endif %}
+			<br /> <br />
+			<div class="comment-box">
+				<textarea class="form-control" readonly>{{comment.text}}</textarea>
+			</div>						
+			<br />
+			<div class="row comment-footer">
+				<div class="col-xs-6 comment-date">
+					<span class="comment-footer-text">{{ comment.date|date:"j M Y" }} {{ comment.date|time|cut:"." }}</span>
+					{% if comment.last_edit %}
+					<i class="fa fa-pen comment-last-edit"></i>
+					{% endif %}
+				</div>
+				<div class="col-xs-6 col-sm-offset-2 col-sm-4 col-md-offset-3 col-md-3">
+					<div class="comment-control">
+						<span class='likeText'> <b id='noOfLikes'>{{ comment.likes }}</b> <i id="like" class="fa fa-thumbs-up"></i> </span>&nbsp;&nbsp;
+						{% if not comment.parent %} <span id="reply"> <i class="fa fa-reply"></i> </span> {% endif %}
+					</div>										
+				</div>
+			</div>		
+		</div>
+	</div>		
+</body>
+</html>

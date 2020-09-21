@@ -1,0 +1,112 @@
+	{% extends 'base.html' %}
+	{% block cssFiles %}
+
+		{% load staticfiles %}
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+
+	{% endblock %}
+	{% block headerTitle %}
+
+		<h1 class="my-4 mainHeader"> Search </h1>					
+
+	{% endblock %}
+	{% block mainContent %}	
+	<div class="result-for">
+		<h6> Result for: <strong>{{ target }}</strong></h6>
+		<hr class="result-for-seperator">
+	</div>	
+	{% if articles %}					    
+		{% for article in articles %}
+			<br />	
+			<div id='postedArticles'> 				
+				<a href="{% url 'articles' article_id=article.id %}"><h2 class="title"> {{ article.title|title }} </h2></a>	
+				<br />
+				<span class="footer-text"> Posted on {{ article.date|date:"j M Y h:s A" }} 
+				<br />
+				By <a href="{% url 'profile' person=article.user.username %}" class="userName"> {{ article.user }} </a>
+				</span>
+				<hr style="height: 1px; background-color: teal;">
+				<p class="text"> {{ article.body | safe | truncatewords:30 }} </p>
+				<br />					
+				<div class="row">
+					<div class="col-xs-10 col-md-11">
+						<hr style="height: 1px; background-color: teal;">
+					</div>
+					<div class="col-xs-2 col-md-1">
+						<a class="btn btn-primary" id="readMore" href="{% url 'articles' article_id=article.id %}"><i class="fa fa-plus"></i> More </a>			
+					</div>
+				</div>
+			</div>						
+		{% endfor %}
+		<br /> <br />				
+		<ul class="pagination justify-content-center mb-4">						
+			<li class="page-item">
+				{% if articles.has_previous %}
+			        <a class="page-link" href="?page=1"> first </a>
+			    {% endif %}							
+			</li>
+			<li class="page-item">
+				{% if articles.has_previous %}
+			        <a class="page-link" href="?page={{ articles.previous_page_number }}"> &larr; previous </a>
+			    {% endif %}							
+			</li>		
+			<li class="page-item">
+				{% if articles.has_next %}
+			        <a class="page-link" href="?page={{ articles.next_page_number }}"> next &rarr; </a>
+			    {% endif %}
+			</li>
+			<li class="page-item">
+				{% if articles.has_next %}
+			        <a class="page-link" href="?page={{ articles.paginator.num_pages }}"> last </a>
+			    {% endif %}							
+			</li>
+		</ul>	
+		<span class="page-counter"> Page {{ articles.number }} of {{ articles.paginator.num_pages }}. </span>
+	{% elif users %}		
+		{% for user in users %}
+		<div class="users_search_box">
+			<div id='users'> 						
+				<br />
+				<img class="img-circle" style="{% if user.profile.avatar_url %} padding: 0px; {% endif %}" src="{{ user.profile.avatar_url|default_if_none:'/static/media/Images/userDp.png' }}">			
+		    	<a href="{% url 'profile' person=user.username %}" class="userName"> {{ user.username|title }} </a>
+		    	<br/>
+		    	{% if user.profile.online %}
+		    		<strong class="online"><i class="fa fa-circle"></i> Online </strong>
+		    	{% else %}	
+		    		<strong class="offline"><i class="fa fa-circle-o"></i> Offline </strong>
+		    	{% endif %}	
+			</div>
+		</div>		
+		{% endfor %}
+		<br /> <br />				
+		<ul class="pagination justify-content-center mb-4">						
+			<li class="page-item">
+				{% if users.has_previous %}
+			        <a class="page-link" href="?page=1"> first </a>
+			    {% endif %}							
+			</li>
+			<li class="page-item">
+				{% if users.has_previous %}
+			        <a class="page-link" href="?page={{ users.previous_page_number }}"> &larr; previous </a>
+			    {% endif %}							
+			</li>		
+			<li class="page-item">
+				{% if users.has_next %}
+			        <a class="page-link" href="?page={{ users.next_page_number }}"> next &rarr; </a>
+			    {% endif %}
+			</li>
+			<li class="page-item">
+				{% if users.has_next %}
+			        <a class="page-link" href="?page={{ users.paginator.num_pages }}"> last </a>
+			    {% endif %}							
+			</li>
+		</ul>	
+		<span class="page-counter"> Page {{ users.number }} of {{ users.paginator.num_pages }}. </span>
+	{% else %}
+		<div class="no-result">	
+			<br />				
+			<strong> <i class="fa fa-exclamation-circle"></i> Sorry nothing found. </strong>	
+		</div>
+	{% endif %}		
+	{% endblock %}

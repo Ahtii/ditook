@@ -1,0 +1,134 @@
+
+.form-title {
+					
+		background-color: #cd1b27;
+		padding: 30px;
+		margin-right: -1px;
+		margin-top: 0;			
+		font-family: "Arial";
+		font-size: 25px;
+		color: white;
+		box-shadow: 0px 0px 10px rgb(32,42,62);			
+}
+
+.form-box {
+		
+		border: 1px solid rgb(32,42,62);
+		border-radius: 0;	
+		border-left: 1px solid teal;
+		border-right: 1px solid teal;
+		border-bottom: 2px solid teal;		
+}
+
+#contactBox { position: relative; }
+
+.form-box button {
+
+		font-family: "Arial";
+		background-color: white;
+		padding: 6px; 
+		padding-top: 3px; 
+		padding-bottom: 3px;
+		color: gray;
+		font-size: 13px;	
+		border: none;		
+		outline: none;
+		width: 25px;
+		height: 25px;
+}
+
+.form-box button:hover{ color: teal; font-size: 13.5px; }
+
+.formLabel {
+
+		color: rgb(32,42,62);
+		font-family: "Arial";
+		font-size: 15px;		
+}
+
+.formInput {
+
+		font-family: "Tohamo";
+		font-size: 12px;
+		color: rgb(32,42,62);
+}
+
+#message textarea { 	
+	width: 100%; 
+	border: none; 
+	resize: none; 
+	min-height: 135px; 
+	overflow: auto; 
+	outline: none;
+	font-size: 14px;
+	font-family: "Arial";
+	color: rgb(100, 100, 100);
+}
+
+#message textarea::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+#message textarea::-ms-input-placeholder {
+  color: #999;
+}
+
+#message textarea::-webkit-input-placeholder {
+  color: #999;
+}
+
+
+.messageBox {
+	min-height: 200px;
+	display: block;
+	overflow: auto;	
+}
+
+.messageBox:focus{ border: 1px solid teal; outline: teal; }
+
+#sendMsg #separator hr { margin-top: -35px; }
+
+#sendMsg #contactFormBtn, #showContactErrMsg, #showLeftChars { position: absolute; margin-top: -30px; }
+
+#sendMsg #showContactErrMsg { padding-left: 55px; font-size: 12px;}
+
+#showContactErrMsg { font-size: 14px; color: maroon; font-family: "Arial"; }
+
+@media only screen and (max-width: 1200px) {
+		#sendMsg #showContactErrMsg { padding-left: 40px; }
+}
+
+@media only screen and (max-width: 995px) {
+	    #sendMsg #showContactErrMsg { padding-left: 50px; }
+}
+
+@media only screen and (max-width: 680px) {
+		#sendMsg #showContactErrMsg { padding-left: 40px; }	
+}
+
+@media only screen and (max-width: 580px) {
+
+		.formLabel{ font-size: 14px; }
+		.form-box button { padding: 5px; padding-top: 2px; padding-bottom: 2px; }
+		.form-title { font-style: 15px; }	
+		#message button { left: -2px; } 	
+}
+
+@media only screen and (max-width: 480px) {
+		#message #showContactErrMsg { padding-left: 35px; }
+}
+
+@media only screen and (max-width: 420px){
+
+		.form-box button { margin-left: -10px; }		
+}
+
+@media only screen and (max-width: 380px) {
+		#message #showContactErrMsg { padding-left: 25px; }
+		#message button { left: 0px; } 
+}
+
+@media only screen and (max-width: 320px){
+		/*.form-box { width: 10%; }*/
+}

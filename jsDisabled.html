@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Ditook </title>
+	<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.css">
+	<style type="text/css">
+
+		body {
+
+				min-width: 320px;
+		}
+
+		.errorMsg {
+
+					color: #E32636;
+					font-family: "Century Gothic";
+					font-size: 30px;
+					text-align: center;
+					font-weight: normal;
+		}
+
+		.errorMsgPara {
+
+					color: gray;
+					font-family: "Century Gothic";
+					font-size: 22px;	
+					margin-left: 50px;		
+		}
+
+		.errorMsgList {
+
+					color: gray;
+					font-family: "Century Gothic";
+					font-size: 18px;
+					margin-left: 50px;
+					font-weight: bold;					
+		}
+
+		img.errorImg {
+
+					display: block;
+					margin: 0 auto;
+		}
+
+		@media only screen and (max-width: 480px){
+
+					.errorMsg {
+
+							font-size: 25px;
+					}
+
+					img.errorImg {
+
+							width: 300px;
+							height: 300px;
+					}				
+		}
+
+		@media only screen and (max-width: 380px){
+
+					img.errorImg {
+
+							width: 250px;
+							height: 250px;
+					}
+
+					.errorMsgPara, .errorMsgList {
+
+							margin-left: 10px;	
+					}
+		}
+	</style>
+	<!-- <script type="text/javascript">
+		var $pathname = window.loaction.pathname;
+		alert($pathname);
+	</script> -->	
+</head>
+<body>
+		<img class="errorImg" src="/static/media/Images/No Js 2.png">		
+		<h1 class="errorMsg">Please enable the javaScript and refresh the page.</h1> 
+		<hr>
+		<div>
+			<h2 class="errorMsgPara"> Below are the steps to enable javaScript in some of the common browsers: </h2>
+			<div>
+				<h3 class="errorMsgPara"><i class="fa fa-chrome"></i> Google Chrome </h3>
+				<ul class="errorMsgList">
+					<li> Goto settings. </li>
+					<li> Advanced. </li>
+					<li> Under Privacy and security section click on Content Settings. </li>
+					<li> Click on JavaScript. </li>
+					<li> Click on Blocked slider. </li>					
+				</ul>
+				<h3 class="errorMsgPara"><i class="fa fa-opera"></i> Opera </h3>
+				<ul class="errorMsgList">
+					<li> Click on opera logo. </li>
+					<li> Goto settings. </li>
+					<li> Click on Websites section. </li>
+					<li> Under JavaScript Heading Select &nbsp; <q> Allow all sites to run JavaScript </q>. </li>									
+				</ul>
+				<h3 class="errorMsgPara"><i class="fa fa-firefox"></i> Mozilla </h3>
+				<ul class="errorMsgList">
+					<li> Type <q> about:config </q> in the address bar. </li>
+					<li> A warning message will be displayed, Click on the button labeled <q> I'll be careful, I promise!</q> or <q> I accept the risk! </q>. </li>
+					<li> In the search bar type <q> javascript.enabled </q>. </li>
+					<li> Double click on the search result to enable/disable the javascript. </li>			
+				</ul>
+				<h3 class="errorMsgPara"><i class="fa fa-safari"></i> Safari </h3>
+				<ul class="errorMsgList">
+					<li> Goto Settings. </li>
+					<li> Click on Preferences. </li>
+					<li> Select Security tab. </q>. </li>
+					<li> Check the <q> Enable JavaScript </q> option. </li>			
+				</ul>
+			</div>
+			<br /> <br />
+		</div>		
+</body>
+</html>

@@ -1,0 +1,28 @@
+
+.noArticle {
+	font-size: 14px;
+	color: gray;
+	font-weight: bold;
+	text-align: center;	
+}
+
+.userName {
+
+		font-size: 16px;
+		font-family: "Arial";
+		font-weight: bold;
+		color: teal;		
+		cursor: pointer;
+		text-decoration: none;
+}
+
+.userName:hover{ color: rgb(0, 180, 180); }
+
+@media only screen and (max-width: 400px) {
+		#readMore { left: -10px; }
+}
+
+@media only screen and (max-width: 320px) {
+		
+		#readMore { left: -15px; }
+}

@@ -1,0 +1,68 @@
+	
+	{% extends 'base.html' %}
+
+	{% block cssFiles %}
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
+	{% endblock %}
+
+	{% block headerTitle %}
+		<h1 class="my-4 mainHeader"> About </h1>
+	{% endblock %}
+
+	{% block mainContent %}
+
+		<div class="about_body">
+			<div class="row no-gutter about_q">	
+				<div class="col-xs-1"><i class="fa fa-circle-o"></i></div>
+				<div class="col-xs-11 adjustContent">
+					<p> About <strong>Dit</strong><i>ook</i> </p>	
+					<hr class="about_q_seperator">
+				</div>											
+			</div>
+			<div class="row no-gutter about_a">
+				<div class="col-xs-1"><i class="fa fa-circle"></i></div>
+				<div class="col-xs-11 adjustContent">
+					<p> <strong>Dit</strong><i>ook</i> ( <strong>D</strong>ive <strong>I</strong>nto <strong>T</strong>he <strong>O</strong>cean <strong>O</strong>f <strong>K</strong>nowlege ) is a blog content site for rendering quality content for educational purpose. Its designed to give its users best possible way to educate themselves so, that they can survive in the competitive environment out there.</p><br/><br/>	
+					<p> The site not only provides you with the content but, also permits its users to share their knowledge with the world. Because its by sharing we can make this world a better place. </p><br/><br/>
+					<p> Users of this site can share their knowledge by posting it on the <a href="{% url 'articles' %}" id='article_section'> Article </a> section of this site. </p>
+					<br/><br/>
+					<dl>
+						<dt> Note: </dt>
+						<dd> Only the privileged users can post the article and it would be reviewed by us prior to posting. </dd>
+					</dl>
+					<p> This site also provides you some famous quotations. Just to give you that extra boost in your journey of knowledge. </p><br/><br/>
+				</div>				
+			</div>
+			<br/>
+			<div class="row no-gutter about_q">	
+				<div class="col-xs-1"><i class="fa fa-circle-o"></i></div>
+				<div class="col-xs-11 adjustContent">
+					<p> About <strong>Devel</strong><i>oper</i> </p>	
+					<hr class="about_q_seperator">
+				</div>											
+			</div>
+			<div class="row no-gutter about_a">
+				<div class="col-xs-1"><i class="fa fa-circle"></i></div>
+				<div class="col-xs-11 adjustContent">					
+					<div class="developer">
+						<img class="img-rounded developer-img" alt="developer" src="{% static '/media/Images/developer.jpeg' %}"><br/><a class="developer-name" href="https://facebook.com/Ahtisham999" id='article_section'> Ahtisham Shafi <hr class="name-seperator"> </a>
+					</div>
+					<br/>
+					<div class="developer-saying">
+						<p>I believe knowledge is power. Its the knowledge that makes you aware of your rights. Its the knowledge that flourish you. And its the knowledge that makes you human. Without knowledge a person is like a tree with no roots.</p>	
+					</div>				
+				</div>					
+			</div>
+			<hr class="footer-speretor">
+			<strong class="edit_date"> Edited on: &nbsp; 12-May-2018  </strong>
+		</div>
+
+	{% endblock %}
+
+	{% block scriptFiles %}
+	{% load staticfiles %}
+
+		<script type="text/javascript" src="{% static 'js/about.js' %}"></script>
+
+	{% endblock %}

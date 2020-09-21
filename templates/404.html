@@ -1,0 +1,29 @@
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="/static/media/Images/ditook.png">	
+	<title>Ditook</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/404.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+</head>
+<body>
+	<div class="err404">
+		<strong class='errTitle'><i class="fa fa-times-circle"></i> Page not found.</strong>
+		<hr class="errTitleLine">
+		{% if fixes %}
+		<p class="errDetailTitle"> Fix: </p>
+		{% for fix in fixes %}
+			<p class="errDetail"><i class="fa fa-arrow-right"></i> {{ fix }} </p>	
+		{% endfor %}
+		{% elif problems %}
+		<p class="errDetailTitle"> Possible Issue: </p>
+		{% for problem in problems %}
+			<p class="errDetail"><i class="fa fa-arrow-right"></i> {{ problem }} </p>	
+		{% endfor %}		
+		{% endif %}	
+	</div>	
+</body>
+</html>

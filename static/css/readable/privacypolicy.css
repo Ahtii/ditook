@@ -1,0 +1,100 @@
+
+#ppBody {
+
+	font-family: "Arial";
+}
+
+.ppExternalLinks {
+
+	background-color: rgb(72, 82, 92);
+	color: white;
+}
+
+.outerText {
+
+	font-size: 22px;
+}
+
+.innerText {
+	
+	font-size: 20px;
+	color: rgb(72, 82, 92);
+}
+
+.qaText {
+	
+	color: teal;	
+}
+
+.adjustContent {
+
+	padding: 0;
+}
+
+.editDate {
+
+	text-align: right;
+	color: rgb(62, 72, 92);
+	font-family: Arial;
+	font-weight: italic;
+	font-size: 14px;
+}
+
+.row.no-gutter {
+
+	margin-right: 0px;
+}
+
+.footer-seperator { height: 0.5px; background-color: teal; }
+
+dt, dd {
+
+	float: left;
+	display: block;
+}
+
+dd {
+
+	padding-left: 30px;
+}
+
+dt {
+
+	clear: both;
+}
+
+/* On mobile view do the following : */
+
+@media only screen and (max-width: 520px) {
+
+	.row.no-gutter {
+
+		margin-left: 0;
+		margin-right: 0;	
+	}
+
+	.row.no-gutter [class*='col-']:not(:first-child),
+	.row.no-gutter [class*='col-']:not(:last-child) {
+
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+@media only screen and (max-width: 440px) {
+
+	.innerText {
+
+		font-size: 14px;	
+	}
+
+	.outerText {
+
+		font-size: 16px;	
+	}
+
+	.editDate {
+
+		font-size: 14px;
+	}
+}

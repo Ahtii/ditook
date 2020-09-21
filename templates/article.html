@@ -1,0 +1,206 @@
+
+
+	{% extends 'base.html'%}
+	{% load staticfiles %}
+	{% block cssFiles %}		
+		<link rel="stylesheet" type="text/css" href="{% static 'css/article.css' %}">
+	{% endblock %}
+	{% block current_article %}	
+		<title> {{ article.title }} </title>	
+		<meta name="title" content="{{ article.title }}">	
+		<meta name="description" content="{{ article.body | safe | truncatewords:30 }}">
+		<meta name="author" content="{{ article.author }}">	
+		<meta name="google-site-verification" content="YahU_d-RfPAMr0fIPNY3FqBXWPIOxrz3pZn6f9z62s8" />
+	{% endblock %}
+	{% block otherMetaTags %}		
+  		<meta property="og:url"          			 content="https://ditook.com/articles/{{ article.id }}" />
+  		<meta property="og:type"          			 content="article" />
+		<meta property="og:title"         			 content="{{ article.title | title }}" />
+		<meta property="og:description"   			 content="{{ article.body | striptags | truncatewords:30 }}" />
+		<meta property="og:image"                    content="https://ditook.com/static/media/Images/ditook_share.jpg" />
+		<meta property="og:image:width"              content="1600" />
+		<meta property="og:image:height"             content="1600" />
+		<meta property="fb:app_id"					 content="2060825523934251">	
+	{% endblock %}
+
+	{% block headerTitle %}
+		<h1 class="my-4 mainHeader"> Article </h1>					
+	{% endblock %}
+	{% block cur_category %}
+		<p class="subHeader"> <b>{{ article.category|title }}</b></p>
+	{% endblock %}
+
+	{% block mainContent %}			
+					<div id='group'></div>
+					{% if request.user.is_authenticated and request.user.is_staff or request.user.is_superuser %}	
+					<br /> 		
+					<div class="row" id="articleBox">
+						<div class="col-xs-12">								
+							<div class="article-form">					
+								<div class="article-form-heading"><i class="fa fa-pencil"></i> Write An Article </div>
+								<br />
+								<form id='articleForm'>{% csrf_token %}							<div class="row">
+										<div class="col-xs-12 col-sm-12 col-md-5">
+											<div class="form-group">
+												<label class="formLabel"><i class="fa fa-list-ul"></i> Category </label>
+												<br />
+												<select class="category-menu">
+													<option id='empty'></option>
+													<option id='framework'> framework </option>
+													<option id='server'> server </option>
+													<option id='data_structure'> data structure </option>
+													<option id='mathematics'> mathematics </option>
+													<option id='marketing'> marketing </option>	
+													<option id='database'> database </option>
+													<option id='operating_system'> operating system </option>	
+													<option id='other'> others </option>
+												</select>
+											</div>	
+										</div>
+										<div class="col-sm-12 col-md-7">
+											<div class="form-group">
+												<label class="formLabel"> Title </label>
+												<input id='articleTitle' type="text" class="form-control" placeholder="&#xf040; Title" style="font-family:Arial, FontAwesome">
+											</div>		
+	 									</div>
+	 									<div class="col-sm-12">
+	 										</br></br>	 									
+	 										<div class="form-group post_editor">
+												<textarea id='articleBody' name="editor" class="form-control" placeholder="&#xf040; Write An Article" style="font-family:Arial, FontAwesome"></textarea>
+											</div>
+	 									</div>	 									
+									</div>					
+									<div class="row">
+										<div class="col-xs-5">
+											<button type='submit' class="btn btn-success"> Submit </button>
+										</div>
+										<div class="col-xs-7">
+											<strong id='articleErrMsg'></strong>
+										</div>
+									</div>
+								</form>	
+							</div>
+						</div>
+						<form id="article_img_uploader_form" method="post" enctype="multipart/form-data">
+							<input id="article_img_uploader" type="file" accept="image/*">
+						</form>
+					</div>					
+					<br/><br/>
+					{% endif %}
+					<div class="article_details">
+						<h2 class="title"> {{ article.title|title }} </h2>
+						<br />
+						<span class="post-date"> By <a href="{% url 'profile' person=article.user.username %}" class="userName"> {{ article.user|title }} </a>
+							<br />
+							Posted on {{ article.date|date:"j M Y h:s A" }} 							
+						</span>
+						{% if article.last_edit %}
+						<br />
+						<span class="last-edit"> Last edit on {{ article.last_edit|date:"j M Y h:s A" }}
+						</span>
+						{% endif %}
+						<hr>
+						<div class="text"> {{ article.body | safe }} </div>						
+						{% if article.user == request.user %}
+							<br>
+							<div class="article_control col-xs-offet-4">
+								<i class="fa fa-edit article_update"> edit</i> &nbsp; &nbsp; &nbsp;
+								<i class="fa fa-trash article_delete"> delete</i>			
+							</div>
+							<br>
+						{% endif %}
+					</div>					
+					<div class="row article_controls">
+						<hr class="articleControls"/>
+						<div class="col-xs-8">						
+							<span class="articleLikes {% if A_LikedByCurUser %} change-color {% else %} default-color {% endif %}"> <i class="fa fa-thumbs-up"></i> <b>{{ article.likes }}</b> </span> &nbsp; &nbsp; &nbsp;
+							<div class="articleShares dropdown"> 
+								<span id="share_trigger" class="dropdown-toggle {% if A_SharedByCurUser %} change-color {% else %} default-color {% endif %}" data-toggle="dropdown"><i class="fa fa-share-alt"></i> <span class="share_with"> share with </span><i class="fa fa-angle-down"></i></span> 
+								<ul class="dropdown-menu">
+									<div id='share_pointer'></div>
+									<li id='share_fb'><i class="fa fa-facebook"></i></li>
+									<li id='share_tw'><i class="fa fa-twitter"></i></li>
+									<li id='share_go'><i class="fa fa-google-plus"></i></li>			
+								</ul>
+							</div>					
+						</div>
+						<div class="col-xs-4 col-md-offset-1 col-md-3">
+							<span class="comment"><i class="fa fa-comments"></i> <b> {{ NoOfComments }} </b> </span>
+						</div>										
+					</div>
+					<br /> <br />
+					{% if not request.user.is_authenticated %}
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="alert alert-warning alert-dismissable">
+								<a href="#" class="close" data-dismiss="alert">&times;</a>
+								<h5> Please <a href="#" data-target="#loginModal" data-toggle="modal" class="alert-link" id="alert-login"> login </a> to comment. </h5>
+							</div>				
+						</div>
+					</div>
+					{% else %}	
+					<div class="row postComment">						
+						<div class="col-xs-11">
+							<div class="comment-form" id="test">
+								<div class="form-group">
+									<form id='articleCommentForm'>{% csrf_token %}
+										<textarea class="form-control" placeholder="&#xf040; Write comment" style="font-family:Arial, FontAwesome"></textarea>
+										<button type="submit" class="btn btn-primary"> Comment </button>
+									</form>																
+								</div>							
+							</div>
+						</div>
+					</div>
+					{% endif %}	
+					{% if comments %}	
+					{% for comment in comments %}		
+					<div class="row commentStyle">
+						<input id='comment_id' type="hidden" value="{{ comment.id }}" readonly>			
+						<div class="{% if comment.parent %} col-xs-offset-1 {% endif %} col-xs-10 commentSection">
+							<a href="{% url 'profile' person=comment.user.username %}" class="userName"> {{ comment.user }}</a>
+							{% if request.user.is_authenticated %}
+							{% if request.user == comment.user %}
+							<p class="comment-edit"><i class="fa fa-edit"></i></p>
+							<p class="comment-del"><i class="fa fa-trash"></i></p>
+							{% endif %}
+							{% endif %}
+							<br /> <br />							
+							<div class="comment-box">
+								<textarea class="form-control" readonly>{{comment.text}}</textarea>
+							</div>												
+							<br />
+							<div class="row comment-footer">
+								<div class="col-xs-6 comment-date">
+									<span class="comment-footer-text">{{ comment.date|date:"j M Y" }} {{ comment.date|time|cut:"." }}</span>		
+									{% if comment.last_edit %}
+									<i class="fa fa-pencil comment-last-edit" title="Last edit {{ comment.last_edit|date:'j M Y' }} {{ comment.last_edit|time|cut:'.' }}"></i>
+									{% endif %}	
+								</div>
+								<div class="col-xs-6 col-sm-offset-2 col-sm-4 col-md-offset-3 col-md-3">
+									<div class="comment-control">
+										<span class="likeText {% for userLike in C_LikedByCurUser %}{% if userLike == comment.id %} change-color {% endif %}{% endfor %}"> <b id='noOfLikes'>{{ comment.likes }}</b> <i id="like" class="fa fa-thumbs-up"></i></span>&nbsp;&nbsp;
+										{% if not comment.parent %} 
+										<span id="reply"> <i class="fa fa-reply"></i> </span> {% endif %}
+									</div>							 			
+								</div>
+							</div>						
+						</div>
+					</div>
+					{% endfor %}
+					{% else %}
+					<div class="row commentStyle"></div>
+					{% endif %}						
+	{% endblock %}
+
+	{% block scriptFiles %}
+
+	{% load staticfiles %}
+
+	<script type="text/javascript" src="{% static 'js/article.js' %}"></script>
+	<script src="{% static 'js/jquery.tinymce.min.js' %}"></script>  	
+	<script src="{% static 'js/tinymce.min.js' %}"></script>
+	<input type="hidden" id="article_user" value="{{ article.user }}" readonly>
+	<input type="hidden" id="article_id" value="{{ article.id }}" readonly>	
+	<input type="hidden" id="target_comment" value="{{ target_comment }}" readonly>	
+	<input type="hidden" id="target_article" value="{{ target_article }}" readonly>			
+	{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<title></title>
+</head>
+<body>
+	{% if articles %}						    
+		{% for article in articles %}
+			<div id='postedArticles'> 				
+				<a href="{% url 'articles' article_id=article.id %}"><h2 class="title"> {{ article.title|title }} </h2></a>	
+				<br />
+				<span class="post-date"> By <a href="{% url 'profile' person=article.user.username %}" class="userName"> {{ article.user|title }} </a>
+					<br />
+					Posted on {{ article.date|date:"j M Y h:s A" }} 							
+				</span>
+				{% if article.last_edit %}
+				<br />
+				<span class="last-edit"> Last edit on {{ article.last_edit|date:"j M Y h:s A" }}
+				</span>
+				{% endif %}
+				<hr style="height: 1px; background-color: teal;">
+				<p class="text"> {{ article.body | safe | truncatewords:30 }} </p>
+				<br />					
+				<div class="row">
+					<div class="col-xs-10 col-md-11">
+						<hr style="height: 1px; background-color: teal;">
+					</div>
+					<div class="col-xs-2 col-md-1">
+						<a class="btn btn-primary" id="readMore" href="#"><i class="fa fa-plus"></i> More </a>			
+					</div>
+				</div>
+			</div>
+			<br />					
+		{% endfor %}
+	{% else %}
+		<div class="noArticleArea">
+			<strong class="noArticle">No article found.</strong>
+		</div>
+	{% endif %}							
+	<br /> <br />				
+	<ul class="pagination justify-content-center mb-4">						
+		<li class="page-item">
+			{% if articles.has_previous %}
+		        <a class="page-link" href="?page=1"> first </a>
+		    {% endif %}							
+		</li>
+		<li class="page-item">
+			{% if articles.has_previous %}
+		        <a class="page-link" href="?page={{ articles.previous_page_number }}"> &larr; previous </a>
+		    {% endif %}							
+		</li>		
+		<li class="page-item">
+			{% if articles.has_next %}
+		        <a class="page-link" href="?page={{ articles.next_page_number }}"> next &rarr; </a>
+		    {% endif %}
+		</li>
+		<li class="page-item">
+			{% if articles.has_next %}
+		        <a class="page-link" href="?page={{ articles.paginator.num_pages }}"> last </a>
+		    {% endif %}							
+		</li>
+	</ul>	
+	<span class="page-counter"> Page {{ articles.number }} of {{ articles.paginator.num_pages }}. </span>
+</body>
+</html>

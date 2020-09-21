@@ -1,0 +1,56 @@
+	{% extends 'base.html' %}	
+
+	{% block cssFiles %}
+
+		{% load staticfiles %}
+		
+		<link rel="stylesheet" type="text/css" href="{% static 'css/termsandconditions.css' %}">
+		
+	{% endblock %}
+
+	{% block headerTitle %}
+
+		<h1 class="my-4 mainHeader"> <strong>Terms of use</strong> </h1>
+
+	{% endblock %}
+
+	{% block mainContent %}		
+
+		<div id='tcBody'>
+
+			<div class="outerText"> <strong> Introduction </strong> </div><br />
+
+			<div class='innerText'>These terms and conditions (<i class="emp"> Terms </i>, <i class="emp"> Agreement </i>) are an agreement between Website Operator and you (<i class="emp"> User </i>) ). This Agreement sets forth the general terms and conditions of your use of the This </a> website and any of its products or services ( collectively, <i class="emp"> Website </i> or <i class="emp"> Services</i> ).</div><br/>
+
+			<div class="outerText"> <strong> Accounts &amp; membership </strong> </div><br />
+
+			<div class='innerText'>If you create an account on this Website, you are responsible for maintaining the security of your account and you are fully responsible for all activities that occur under the account and any other actions taken in connection with it. Providing false contact information of any kind may result in the termination of your account. You must immediately notify us of any unauthorized uses of your account or any other breaches of security. We will not be liable for any acts or omissions by you, including any damages of any kind incurred as a result of such acts or omissions.</div><br />
+		
+			<div class="outerText"> <strong> User content </strong> </div><br />
+
+			<div class='innerText'>We do not own any data, information or material ( <i class="emp"> Content </i> ) that you submit on the Website in the course of using the Service. You shall have sole responsibility for the accuracy, quality, integrity, legality, reliability, appropriateness, and intellectual property ownership or right to use of all submitted Content. We may monitor Content on the Website submitted or created using our Services by you. Unless specifically permitted by you, your use of the Website does not grant us the license to use, reproduce, adapt, modify, publish or distribute the Content created by you or stored in your user account for commercial, marketing or any similar purpose. But you grant us permission to access, copy, distribute, store, transmit, reformat, display and perform the Content of your user account solely as required for the purpose of providing the Services to you. Without limiting any of those representations or warranties, we have the right, though not the obligation, to, in our own sole discretion, refuse or remove any Content that, in our reasonable opinion, violates any of our policies or is in any way harmful or objectionable.</div><br />
+
+			<div class="outerText"> <strong> Backups </strong> </div><br />
+
+			<div class='innerText'>We perform regular backups of the Website and Content and will do our best to ensure completeness and accuracy of these backups. In the event of the hardware failure or data loss we will restore backups automatically to minimize the impact and downtime.</div><br />
+
+			<div class="outerText"> <strong> Links to other websites </strong> </div><br />
+
+			<div class='innerText'>Although this Website may be linked to other websites, we are not, directly or indirectly, implying any approval, association, sponsorship, endorsement, or affiliation with any linked website, unless specifically stated herein. We are not responsible for examining or evaluating, and we do not warrant the offerings of, any businesses or individuals or the content of their websites. We do not assume any responsibility or liability for the actions, products, services and content of any other third parties. You should carefully review the legal statements and other conditions of use of any website which you access through a link from this Website. Your linking to any other off-site websites is at your own risk.</div><br />
+
+			<div class="outerText"> <strong> Advertisements </strong> </div><br />
+
+			<div class='innerText'>During use of the Website, you may enter into correspondence with or participate in promotions of advertisers or sponsors showing their goods or services through the Website. Any such activity, and any terms, conditions, warranties or representations associated with such activity, is solely between you and the applicable third-party. We shall have no liability, obligation or responsibility for any such correspondence, purchase or promotion between you and any such third-party.</div><br />
+
+			<div class="outerText"> <strong> Changes and amendments </strong> </div><br />
+
+			<div class='innerText'>We reserve the right to modify this Agreement or its policies relating to the Website or Services at any time, effective upon posting of an updated version of this Agreement on the Website. When we do we will  post a notification on the main page of our Website. Continued use of the Website after any such changes shall constitute your consent to such changes.</div><br />
+
+			<div class="outerText"> <strong> Acceptance of these terms </strong> </div><br />
+
+			<div class='innerText'>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using the Website or its Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access the Website and its Services.</div><br />
+
+			<div class='editDate'><br><strong>Last edit: 07-01-2018</strong></div>
+		</div>	
+
+	{% endblock %}

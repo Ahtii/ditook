@@ -1,0 +1,5 @@
+ 
+curArticle = ''
+curArticleComments = ''
+
+likedComment = False

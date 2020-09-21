@@ -1,0 +1,283 @@
+
+body { background-color: rgb(240, 240, 240); }
+
+.settingsContent {
+
+	font-size: 16px;
+	font-family: "Tohamo";		
+}
+
+.settingsContent div:last-child { margin-bottom: -30px; }
+
+.tabs { 
+
+	z-index: 5; 
+	padding: 20px; 
+	width: 210px;
+	padding-left: 50px;	
+	margin-left: 70px;
+}
+
+.tabs a { text-decoration: none; color: rgb(62, 72, 92); }
+
+.tabs strong:hover {
+
+	border-left: solid 2px teal;
+	padding-left: 10px;
+	transition: padding-left 0.2s;
+	-webkit-transition: padding-left 0.2s;
+	position: relative;
+}
+
+.tabDetails {
+	
+	margin-left: -85px; 
+	width: 70%; 
+	padding-top: 50px;  
+	padding-bottom: 100px;  
+	left: 10%;			
+}
+
+.tabTitle {
+	text-align: center;
+	font-size: 16px;
+	font-family: "Arial";
+	margin-top: -30px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid teal;
+	box-shadow: 0px 2px 2px silver;
+	padding-bottom: 15px;
+	color: rgb(62, 72, 92);
+	font-weight: bold;
+}
+
+.settingsTabTitle {
+	width: 150%;
+	margin-left: -50px;
+	text-align: center;
+	font-size: 16px;
+	font-family: "Arial";
+	margin-bottom: 30px;
+	border-bottom: 1px solid teal;
+	box-shadow: 0px 2px 2px silver;
+	padding-bottom: 15px;
+	color: rgb(62, 72, 92);
+	font-weight: bold;
+}
+#accountUsername input { margin-left: 80px; width: 150px; }
+#accountEmail input { margin-left: 110px; width: 50%; }
+#emailOption strong, #articleOption strong, #muteNotification strong { font-weight: bold; color: teal; }
+#accountDeactivate strong { padding-left: 110px; }
+#accountPassword input { margin-left: 30px; width: 100px; }
+#accountTimezone input { margin-left: 30px; }
+#accountDeactivate .fa-toggle-off, #emailOption .fa-toggle-off, #articleOption .fa-toggle-off, #muteNotification .fa-toggle-off { color: teal; }
+.fa-edit { color: teal; }
+.accountSeparator { margin-right: 85px; padding-bottom: 1px; background-color: gray; }
+.tabBody i {
+	transition: 2s linear all;
+}
+.tabBody input { 
+	border: none; 
+	border-bottom: 1px solid teal; 
+	padding-left: 10px; 
+	padding-right: 10px; 
+}
+.tabBody { padding-top: 50px; }
+
+.tabBody strong a { cursor: pointer; text-decoration: none; z-index: 5; float: right; margin-right: 85px; }
+.tabBody span {  
+	color: teal; 
+	padding-right: 5px; 
+	margin-top: -2px; 
+	font-size: 14px;	
+}
+#accountDeactivate, #emailOption, #articleOption, #muteNotification { margin-bottom: 80px; }
+
+.mobileTabs { 
+
+	display: none;
+	position: relative;
+	width: 25px; 
+	margin-left: -2px; 
+	padding-left: 5px; 
+	height: 140px; 
+	z-index: 5;
+}
+
+.mobileTabs .fa-list { font-size: 14px;  margin-left: -3px; padding-top: 5px; }
+
+.settingsMenu { padding-top: 10px; }
+
+.settingsMenu a { font-size: 14px; text-decoration: none; }
+
+.settingsMenu a span { 
+	
+	display: none;
+	color: rgb(62, 72, 92); 
+	font-size: 13px; 
+	font-family: "Arial"; 
+	font-weight: bold;
+}
+
+.settingsMenu i { 
+	margin-left: 0px; 
+	padding-top: 10px; 
+	font-weight: bold; 
+	color: rgb(62, 72, 92); 
+}
+
+.settingsMenu #settingsNotification i { margin-left: -2px; }
+
+.settingsMenu a > *:hover { color: teal; }
+
+.settingsMenuTitle { 
+	cursor: pointer;
+	/*padding-left: 2px; */
+	padding-left: 0px;
+	border-bottom: 1px solid gray; 
+	padding-bottom: 10px; 
+	padding-top: 5px;	
+}
+#accountSettingsForm .errMsg { 
+	color: maroon; 
+	font-family: Arial; 
+	font-size: 11px; 
+	padding-top: 25px; 
+	margin-left: -10px; 
+}
+
+#accountSettingsForm button, #privacySettingsForm button, #notificationSettingsForm button   { 
+	float: right;
+	margin-top: 20px;	
+	background-color: transparent;
+	border: 2px solid teal;
+	border-radius: 10px;
+	font-size: 12px;
+	font-family: "Tohamo";
+	color: teal;
+	font-weight: bold;
+	height: 22px;
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	outline: none;
+}
+
+#privacySettingsForm button, #notificationSettingsForm button { margin-right: 85px; }
+
+#accountSettingsForm button:hover, #privacySettingsForm button:hover, #notificationSettingsForm button:hover{
+	background-color: teal;
+	color: white;
+	transition: background-color 0.3s;
+	-webkit-transition: background-color 0.3s;
+	transition: color 0.5s;
+	-webkit-transition: color 0.5s;
+}
+
+#privacyDetails, #notificationDetails { display: none; }
+
+@media only screen and (max-width: 1200px){
+
+	.tabs { margin-left: 50px; }
+	.tabTitle, .settingsTabTitle { font-size: 15px; }
+	.tabDetails { font-size: 14px; }
+	.tabs { font-size: 14px; }
+	#accountUsername input { margin-left: 75px; }
+	#accountEmail input { margin-left: 100px; }
+	#accountDeactivate strong { padding-left: 100px; }
+	#accountPassword input { padding-left: 10px; }
+	#accountTimezone select { padding-left: 10px; }
+}
+
+@media only screen and (max-width: 1050px){
+
+	.tabs { margin-left: 40px; }	
+	.accountSeparator, .tabBody strong a { margin-right: 10px; }
+	.tabBody { margin-left: 30px; }	
+	#privacySettingsForm button, #notificationSettingsForm button   { margin-right: 10px; }
+}
+
+@media only screen and (max-width: 940px){
+
+	.tabs { margin-left: 15px; }
+	.accountSeparator, #accountSettingsForm strong a { margin-right: 10px; }
+	.tabDetails { left: 11%; }	
+}
+
+@media only screen and (max-width: 820px){
+
+	.tabTitle, .settingsTabTitle { font-size: 14px; }
+	.settingsTabTitle { width: 157%; margin-left: -45px; }
+	.tabs { width: 180px; font-size: 12px; }
+	.tabs:not(.settingsTabTitle) { padding-left: 45px; }
+	.tabDetails { left: 12%; font-size: 12px; }
+	#accountUsername input { margin-left: 60px; }
+	#accountEmail input { margin-left: 82px; }
+	#accountDeactivate strong { padding-left: 90px; }
+	#accountPassword input { margin-left: 22px; }
+	#accountTimezone select { padding-left: 90px; }
+	.tabBody span { font-size: 12px; }	
+}
+
+@media (min-width: 767px) and (max-width: 767px){
+	.accountSeparator, .tabBody strong a { margin-right: 5px; }
+	.tabBody { margin-left: 5px; padding-top: 30px; }
+	.settingsContent div:last-child { margin-bottom: -65px; }
+	#accountSettingsForm button, #privacySettingsForm button, #notificationSettingsForm button   { margin-right: 0px; }
+}
+
+@media (max-width: 767px){
+	.accountSeparator, .tabBody strong a { margin-right: 5px; }
+	.tabBody { margin-left: 5px; padding-top: 30px; }
+	.settingsContent div:last-child { margin-bottom: -65px; }
+	#accountSettingsForm button, #privacySettingsForm button, #notificationSettingsForm button   { margin-right: 0px; }
+}
+
+@media (max-width: 740px){
+	.tabTitle, .settingsTabTitle { font-size: 13px; }
+	.settingsTabTitle { width: 150%; margin-left: -30px; }
+	.tabs { margin-left: 10px; width: 150px; font-size: 11px; }
+	.tabs:not(.settingsTabTitle) { padding-left: 30px; }
+	.tabDetails { left: 14%; }	
+}
+
+@media (max-width: 640px){
+	.tabTitle, .settingsTabTitle { font-size: 12px; }
+	.tabs { margin-left: 5px; width: 150px; }
+	.tabs:not(.settingsTabTitle) { padding-left: 30px; }
+	.tabDetails { left: 16%; }	
+	.accountSeparator, .tabBody strong a { margin-right: -5px; }
+	.tabBody span { margin-left: 5px; }
+}
+
+@media (max-width: 580px){
+	.tabs { margin-left: 15px!important; width: 120px; }
+	.tabs:not(.settingsTabTitle) { padding-left: 15px; }
+	.settingsTabTitle { width: 145%; margin-left: -15px; }
+	.tabDetails { left: 20%!important; width: 68%; }	
+	.tabBody span { margin-left: 0px; }
+	#accountUsername input { margin-left: 0px; }
+	#accountEmail input { margin-left: 0px; width: 60%; }
+	#accountDeactivate strong { padding-left: 2px; }
+	#accountPassword input { margin-left: 0px; }
+	.tabBody span { font-size: 11px; }	
+}
+
+@media (max-width: 480px){
+	.tabs { display: none; }
+	.mobileTabs { display: block; }
+	.tabDetails { margin-left: 40px; left: 24.5%; width: 85%; margin-top: -140px; }
+	.tabBody span { font-size: 10px;  }
+	.tabTitle { width: 100%; margin-left: 0px; }
+	.tabBody { margin-left: 10px; margin-right: 15px; }
+}
+
+@media (max-width: 380px){
+	.tabDetails { left: 28%; }
+	#accountUsername input { width: 110px; }
+	#accountEmail input { margin-left: 0px; width: 65%; }	
+	#accountPassword input { width: 65px; }
+	.tabBody input { padding-left: 5px; padding-right: 5px; }
+}
+
+@media (max-width: 320px){ .tabDetails { left: 30%!important; } #accountEmail input { width: 60%; } }

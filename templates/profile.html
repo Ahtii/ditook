@@ -1,0 +1,289 @@
+	
+	{% extends 'base.html' %}	
+
+	{% block cssFiles %}
+
+		{% load staticfiles %}
+		
+		<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">	
+
+	{% endblock %}
+	{% block dashboard %}
+		{% if person %}
+		   {% if request.user.is_authenticated %}
+			<div class="fan_parent">
+				<form id='become_fan'>{% csrf_token %}
+					<button type="submit" class="fan_submit" style="{% if is_fan %} color: brown; {% endif %}"> be fan </button>									
+				</form>				
+			</div>
+			{% endif %}
+		{% else %}
+		<div class="dropdown sideBarMenu">			        			
+			<a href="#" id="sidebarHeader" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i> More </a>
+			<ul class="dropdown-menu">	
+				<div id='sidebarPointer'></div>	    
+				<li><a id='editProfile'><i class="fa fa-pencil-square-o"></i> <strong> Edit Profile </strong></a></li>
+				<li><a id='settings' href="{% url 'settings' %}"><i class="fa fa-gears"></i> <strong> Settings </strong></a></li>	
+				<li><a id='help' href="#"><i class="fa fa-question-circle-o"></i> <strong> Help </strong></a></li>
+			</ul>
+		</div>
+		{% endif %}
+	{% endblock%}
+	{% block profileBody %}		
+	{% if person %}			
+		<div class="container-fluid profile-page-content">
+			<div class="row" id="mainContent">
+				<div class="col-xs-offset-1 col-xs-11 col-sm-offset-1 col-sm-5 userIdentity">
+					<div class="userDp">
+						<img class="img-circle" src="{{ person.profile.avatar_url|default_if_none:'/static/media/Images/userDp2.png' }}">
+					</div>
+					<div class="userName">
+						<div> <strong> {{ person.username|title }} </strong> </div>
+						{% if person.profile.online %}
+							<div style="color: lightgreen;"> Online </div>	
+						{% else %}
+							<div style="color: yellow;"> Offline </div>	
+						{% endif %}
+					</div>										
+				</div>					
+				<div class="col-xs-push-10 col-sm-push-10 fan">
+					<div><!-- <i class="fa fa-user fa-lg"></i> --><strong> Fan </strong></div>
+					<div> {{ fan }} </div>
+				</div>			
+				<div class="col-xs-push-8 col-sm-push-8 fans">
+					<div><!-- <i class="fa fa-users fa-lg"></i> --><strong> Fans </strong></div>
+					<div> {{ fans }} </div>
+				</div>
+			</div>				
+		</div>				    
+	    <div class="container-fluid profileInfo">	    	
+	    	<br /><br /><br /><br />	    	
+	    	<div class="row">
+	    		<div class="col-xs-offset-1 col-xs-4 userInfo board">
+	    			<div id="bio">
+	    				<strong><i class="fa fa-dot-circle-o"></i> About </strong><br />
+	    				<textarea placeholder="&#xf111; &nbsp; &#xf111; &nbsp; &#xf111;" style="font-family:Arial, FontAwesome" readonly>{{ person.profile.bio }}</textarea>	
+	    			</div>
+		    		<div id="posts">
+	    				<strong> <i class="fa fa-newspaper-o" aria-hidden="true"></i> Posts </strong><br />
+	    				<strong> {{ number_of_posts }} </strong>
+	    			</div> <br />
+		    		<div id="views">
+	    				<strong> <i class="fa fa-eye" aria-hidden="true"></i> Views </strong><br />
+	    				<strong> {{ profile_views }} </strong>
+	    			</div>    				   	    				    			
+	    		</div> 	    		 		  			   
+				<div class="col-xs-6 col-xs-pull-1 col-sm-7 col-sm-pull-2 profileContent board">
+					<div class="row">
+						<div class="col-sm-offset-3 col-sm-9 contentHeader">
+							<i class="fa fa-newspaper-o fa-lg"></i><strong> Posts </strong>
+							<hr class="contentBorder">		
+						</div>						
+					</div>
+					<div class="row">
+						<div class="col-sm-offset-3 col-sm-8 textStyle">
+							{% if posts %}
+								{% for post in posts %}
+								{% url 'articles' as the_url %}
+									<div class="user_posts">
+										<i class="fa fa-arrow-right"></i> 
+										<a href="{{ the_url }}{{ post.id }}" class="post-title">{{ post.title }}</a> 
+										<hr class="post-title-seperator">
+									</div>
+								{% endfor %}
+							{% else %}
+								<i class="fa fa-info-circle fa-lg"></i> &nbsp; <strong> No posts found.</strong>
+							{% endif %}																
+						</div>
+					</div>													 					
+				</div>											
+	    	</div>	    	   	    		   
+	    </div>	
+	    <!-- Mobile View Of Profile -->
+    	<div class="mobileProfileInfo">
+    		<br/><br/><br/>
+			<div class="mobileProfileSideMenu board">	    				
+    			<i class="fa fa-list profileSideMenuTitle"></i><br /> 
+    			<ul class="list-unstyled profileSideMenu">
+    				<li><a href="" id='bio'><i class="fa fa-dot-circle-o"></i> <span> About</span></a><br />
+    				<div class="updateForm">
+	    				<textarea placeholder="&#xf111; &nbsp; &#xf111; &nbsp; &#xf111;" style="font-family:Arial, FontAwesome" readonly>{{ person.profile.bio }}</textarea>
+	    			</div> 
+    				</li>
+    				<li><a href="" id='posts'><i class="fa fa-newspaper-o"></i> <span> Posts</span></a><br /><strong> {{ number_of_posts }} </strong></li>
+    				<li><a href="" id='views'><i class="fa fa-eye"></i> <span> Views</span></a><br /><strong> {{ profile_views }} </strong></li>	    	
+    			</ul>		    		
+			</div>
+			<div class="mobileProfileContent board">
+				<div class="row">
+					<div class="col-sm-offset-3 col-sm-9 contentHeader">
+						<i class="fa fa-newspaper-o fa-lg"></i><strong> Posts </strong>
+						<hr class="contentBorder">		
+					</div>						
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3 col-sm-8 textStyle">
+						{% if posts %}
+							{% for post in posts %}
+							{% url 'articles' as the_url %}
+								<div class="user_posts">
+									<i class="fa fa-arrow-right"></i> 
+									<a href="{{ the_url }}{{ post.id }}" class="post-title">{{ post.title }}</a> 
+									<hr class="post-title-seperator">
+								</div>
+							{% endfor %}
+						{% else %}
+							<i class="fa fa-info-circle fa-lg"></i> &nbsp; <strong> No posts found.</strong>
+						{% endif %}																
+					</div>
+				</div>													 					
+			</div>
+		</div>	
+	{% else %}
+		<div class="container-fluid">
+			<div class="row" id="mainContent">
+				<div class="col-xs-offset-1 col-xs-11 col-sm-offset-1 col-sm-5 userIdentity">
+					<div class="userDp">
+						<img class="img-circle" src="{{ request.user.profile.avatar_url|default_if_none:'/static/media/Images/userDp2.png' }}">
+					</div>
+					<div class="userName">
+						<div> <strong> {{ request.user.username|title }} </strong>	</div>
+						{% if request.user.is_staff or request.user.is_superuser %}
+						<div class="super"> <i class="fa fa-circle"></i> super </div>	
+						{% else %}
+						<div class="amateur"> <i class="fa fa-circle-o"></i> Amateur </div>
+						{% endif %}
+					</div>										
+				</div>					
+				<div class="col-xs-push-10 col-sm-push-10 fan">
+					<div><!-- <i class="fa fa-user fa-lg"></i> --><strong> Fan </strong></div>
+					<div> {{ fan }} </div>
+				</div>			
+				<div class="col-xs-push-8 col-sm-push-8 fans">
+					<div><!-- <i class="fa fa-users fa-lg"></i> --><strong> Fans </strong></div>
+					<div> {{ fans }} </div>
+				</div>
+			</div>	
+			<div class="alert alert-info updatePro">
+					<button class="close">&nbsp; x</button>
+					<div id="updateProPointer"></div>
+					<p>Click here to update your <strong> Avatar </strong></p>
+			</div>
+			<div class="alert alert-info updateBio">
+					<button class="close">&nbsp; x</button>
+					<div id="updateBioPointer"></div>
+					<p>Click here to update your <strong> Bio </strong></p>
+			</div>			
+		</div>				    	    
+	    <div class="container-fluid profileInfo">	    	
+	    	<br /><br /><br /><br />	    	
+	    	<div class="row">
+	    		<div class="col-xs-offset-1 col-xs-4 userInfo board">
+	    			<div id="bio">
+	    				<strong><i class="fa fa-dot-circle-o"></i> About </strong><br />
+	    				<form id="profileUpdate" method="POST" enctype="multipart/form-data">{% csrf_token %}	    					
+		    				<input type="file" id='uploadImg'>
+		    				<textarea placeholder="&#xf111; &nbsp; &#xf111; &nbsp; &#xf111;" style="font-family:Arial, FontAwesome" readonly>{{ request.user.profile.bio }}</textarea>
+	    					<div class="updateProControls">
+								<ul class="list-unstyled">
+									<li> <button class="cancle">cancle</button> </li>
+									<li> <button type="submit" class="update">update</button> </li>
+								</ul>				
+							</div>
+	    				</form>
+	    			</div>
+	    			<div id="lastLogin">
+	    				<strong> <i class="fa fa-sign-in" aria-hidden="true"></i> Last login </strong><br />
+	    				<strong> {{ request.user.last_login|date:"d M Y" }} </strong>
+	    			</div><br/>
+	    			<div id="joinedOn">
+	    				<strong> <i class="fa fa-group" aria-hidden="true"></i> Joined on </strong><br />
+	    				<strong> {{ request.user.date_joined|date:"d M Y" }} </strong>	    	
+	    			</div><br/>
+		    		<div id="posts">
+	    				<strong> <i class="fa fa-newspaper-o" aria-hidden="true"></i> Posts </strong><br />
+	    				<strong> {{ number_of_posts }} </strong>
+	    			</div> <br />
+		    		<div id="views">
+	    				<strong> <i class="fa fa-eye" aria-hidden="true"></i> Views </strong><br />
+	    				<strong> {{ profile_views }} </strong>
+	    			</div>    				   	    				    			
+	    		</div> 	    		 		  			   
+				<div class="col-xs-6 col-xs-pull-1 col-sm-7 col-sm-pull-2 profileContent board">
+					<div class="row">
+						<div class="col-sm-offset-3 col-sm-9 contentHeader">
+							<i class="fa fa-newspaper-o fa-lg"></i><strong> Posts </strong>
+							<hr class="contentBorder">		
+						</div>						
+					</div>
+					<div class="row">
+						<div class="col-sm-offset-3 col-sm-8 textStyle">
+							{% if posts %}
+								{% for post in posts %}
+								{% url 'articles' as the_url %}
+									<a href="{{ the_url }}{{ post.id }}" class="post-title"> <i class="fa fa-arrow-right"></i> <b>{{ post.title }}</b> </a> <br/> <hr class="post-title-seperator"><br />
+								{% endfor %}
+							{% else %}
+								<i class="fa fa-info-circle fa-lg"></i> &nbsp; <strong> No posts found.</strong>
+							{% endif %}																
+						</div>
+					</div>													 					
+				</div>											
+	    	</div>	    	   	    		   
+	    </div>	
+	    <!-- Mobile View Of Profile -->
+    	<div class="mobileProfileInfo">
+    		<br/><br/><br/>
+			<div class="mobileProfileSideMenu board">	    				
+    			<i class="fa fa-list profileSideMenuTitle"></i><br /> 
+    			<ul class="list-unstyled profileSideMenu">
+    				<li><a href="" id='bio'><i class="fa fa-dot-circle-o"></i> <span> About</span></a><br />
+    					<form id="mobileProfileUpdate" method="POST" enctype="multipart/form-data">{% csrf_token %}	
+    						<div class="updateForm">
+    							<input type="file" id='mobileUploadImg'>
+			    				<textarea placeholder="&#xf111; &nbsp; &#xf111; &nbsp; &#xf111;" style="font-family:Arial, FontAwesome" readonly>{{ request.user.profile.bio }}</textarea>
+								<ul class="list-unstyled updateProControls">
+									<li> <button class="cancle">cancle</button> </li>
+									<li> <button type="submit" class="update">update</button> </li>
+								</ul>	
+    						</div>    						    				
+	    				</form>
+	    			</li>
+    				<li><a href="" id='lastLogin'><i class="fa fa-sign-in"></i> <span> Last login</span></a><br /><strong> {{ request.user.last_login|date:"d M Y" }} </strong></li>
+	    			<li><a href="" id='joinedOn'><i class="fa fa-group"></i> <span> Joined on</span></a><br /> <strong> {{ request.user.date_joined|date:"d M Y" }} </strong></li>
+    				<li><a href="" id='posts'><i class="fa fa-newspaper-o"></i> <span> Posts</span></a><br /><strong> {{ number_of_posts }} </strong></li>
+    				<li><a href="" id='views'><i class="fa fa-eye"></i> <span> Views</span></a><br /><strong> {{ profile_views }} </strong></li>	    	
+    			</ul>		    		
+			</div>
+			<div class="mobileProfileContent board">
+				<div class="row">
+					<div class="col-sm-offset-3 col-sm-9 contentHeader">
+						<i class="fa fa-newspaper-o fa-lg"></i><strong> Posts </strong>
+						<hr class="contentBorder">		
+					</div>						
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3 col-sm-8 textStyle">
+						{% if posts %}
+							{% for post in posts %}
+							{% url 'articles' as the_url %}
+								<a href="{{ the_url }}{{ post.id }}" class="post-title"> <i class="fa fa-arrow-right"></i> <b>{{ post.title }}</b> </a> <br/> <hr class="post-title-seperator"><br />
+							{% endfor %}
+						{% else %}
+							<i class="fa fa-info-circle fa-lg"></i> &nbsp; <strong> No posts found.</strong>
+						{% endif %}																
+					</div>
+				</div>													 					
+			</div>
+		</div>			
+	{% endif %}    
+	{% endblock %}
+
+	{% block scriptFiles %}
+
+	{% load staticfiles %}
+
+	<script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+
+	{% endblock %}

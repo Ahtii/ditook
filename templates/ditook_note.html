@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<head>
+  <title>Ditook</title> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">   
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">    
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+  <link rel="stylesheet" href="{% static 'css/ditook_note.css' %}">    
+</head>
+<body>
+	<div class="form-group">
+		<div class="ribbon">
+			<button id="bold"><span>B</span></button>
+			<button id="italic"><i>I</i></button>
+			<button id="code"><i class="fa fa-code"></i></button>
+		</div>		
+		<div class="note_title_header">
+			<span class="note_title_label">Note: </span>
+			<input type="text" class="form-control note_title">
+		</div>		
+		<iframe class="form-control note_body" name="note_body" demotext="&#xf040; Body"></iframe>
+		<!-- <div class="form-control note_body" demotext="&#xf040; Body" contenteditable="true"></div> -->
+	</div>			
+	<input type="hidden" id="title" value="{{title}}">
+	<input type="hidden" id="body" value="{{body}}">
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="{% static 'js/ditook_note.js'%}"></script>
+</body>
+</html>

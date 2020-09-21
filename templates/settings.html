@@ -1,0 +1,110 @@
+	
+	{% extends 'base.html' %}	
+
+	{% block cssFiles %}
+
+		{% load staticfiles %}
+		
+		<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/settings.css' %}">	
+
+	{% endblock %}
+	{% block headerTitle %}
+
+		<h1 class="my-4 mainHeader"> Settings </h1>					
+
+	{% endblock %}
+
+	{% block profileBody %}	
+	{% if request.user.is_authenticated %}
+	<div class="container-fluid settingsArea">
+    	<br /><br />
+    	<div class="row settingsContent">
+    		<div class="col-xs-offset-1 col-xs-4 tabs board">
+    			<div class="settingsTabTitle"><i class="fa fa-list"></i> Menu 
+    			</div>
+    			<div id="account"> 
+    				<strong> <a href="" id="settingsAccount"><i class="fa fa-id-badge"></i> Account</a> </strong>
+    			</div><br />    			
+    			<div id="privacy"> 
+    				<strong> <a href="" id="settingsPrivacy"><i class="fa fa-user-secret"></i> Privacy</a> </strong>
+    			</div><br />
+    			<div id="notifications"> 
+    				<strong> <a href="" id="settingsNotification"> <i class="fa fa-bell"></i> Notifications</a> </strong>
+    			</div><br />	
+    		</div>
+    		<div class="mobileTabs board">    			
+    			<i class="fa fa-list settingsMenuTitle"></i><br /> 
+    			<ul class="list-unstyled settingsMenu">
+    				<li><a href="" id='settingsAccount'><i class="fa fa-id-badge"></i> <span> Account</span></a></li>
+    				<li><a href="" id='settingsPrivacy'><i class="fa fa-user-secret"></i> <span> Privacy</span></a></li>
+    				<li><a href="" id='settingsNotification'><i class="fa fa-bell"></i> <span> Notification</span></a></li>
+    			</ul>
+    		</div> 	    
+			<div class="col-xs-6 col-xs-pull-1 col-sm-7 col-sm-pull-2 board tabDetails" id="accountDetails">
+				<div class="row tabTitle"><i class="fa fa-id-badge"></i> Account 
+    			</div>
+    			<div class="row">
+    				<div class="col-sm-offset-1 col-sm-11 tabBody">
+    					<form id='accountSettingsForm'>{% csrf_token %}
+							<strong id='accountUsername'>Username: <input type='text' value="{{request.user.username}}" readonly> <a><i class="fa fa-edit"></i> <span>Edit</span></a></strong><br /><br />	
+		    				<strong id='accountEmail'>Email: <input type='email' value="{{request.user.email}}" readonly><a><i class="fa fa-edit"></i> <span>Edit</span></a></strong><br /><br />
+		    				<strong id='accountPassword'>Change Password: <input type='password' value="*********" readonly> <a><i class="fa fa-edit"></i> <span>Edit</span></a></strong><br /><br />	    		
+		    				<strong id='accountTimezone'>Your Timezone: 
+		    					<select id='supportedTimezones' style="margin-left: 50px; width: 280px;">
+		    						<option selected>{{ request.user.profile.timezone }}</option>
+		    						{% for tz in timezone %}
+		    						<option>{{tz}}</option>
+		    						{% endfor %}		    	
+		    					</select>
+		    				</strong><br /><br /><hr class="accountSeparator">
+		    				<strong id='accountDeactivate'> Status: <strong>Active</strong><a href=""><i class="fa fa-toggle-off"></i> <span>Off</span></a></strong>
+		    				<div class="row-fluid">
+		    					<div class="col-xs-8 col-sm-8 errMsg">
+		    						<strong></strong>
+		    					</div>
+		    					<div class="col-xs-4 col-sm-3">		    						
+		    						<button type="submit">Save</button>
+		    					</div>
+		    				</div>		    				
+    					</form>	    		
+	    			</div>
+    			</div> 
+			</div>
+			<div class="col-xs-6 col-xs-pull-1 col-sm-7 col-sm-pull-2 board tabDetails" id="privacyDetails">
+				<div class="row tabTitle"><i class="fa fa-user-secret"></i> Privacy 
+    			</div>
+    			<div class="row">
+    				<div class="col-sm-offset-1 col-sm-11 tabBody">
+    					<form id='privacySettingsForm'>{% csrf_token %}    						
+    						<strong id='emailOption'>Who can see your email ? <br /><strong>Everyone</strong> <a><i class="fa fa-toggle-off"></i> <span>Off</span></a></strong><br /><br />
+	    					<strong id='articleOption'>Who can see your articles ? <br /><strong>Everyone</strong> <a><i class="fa fa-toggle-off"></i> <span>Off</span></a></strong><br />
+	    					<button type="submit">Save</button>
+    					</form>	    				
+	    			</div>
+    			</div> 
+			</div>	
+			<div class="col-xs-6 col-xs-pull-1 col-sm-7 col-sm-pull-2 board tabDetails" id="notificationDetails">
+				<div class="row tabTitle"><i class="fa fa-bell"></i> Notification 
+    			</div>
+    			<div class="row">
+    				<div class="col-sm-offset-1 col-sm-11 tabBody">
+	    				<form id='notificationSettingsForm'>{% csrf_token %}
+	    					<strong id='muteNotification'> Mute Notification: <a><i class="fa fa-toggle-off"></i> <span>Off</span></a></strong><br />
+	    					<button type="submit">Save</button>
+	    				</form>	    				
+	    			</div>
+    			</div> 
+			</div>	  			    												
+    	</div>	    	
+    </div><br /><br />
+	{% endif %}
+	{% endblock %}		
+
+	{% block scriptFiles %}
+
+	{% load staticfiles %}
+
+	<script type="text/javascript" src="{% static 'js/settings.js' %}"></script>
+
+	{% endblock %}

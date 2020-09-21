@@ -1,0 +1,437 @@
+
+	{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE-edge">
+	<meta name="viewport" content="width-device-width, initial-scale=1">
+	<meta name="google-site-verification" content="YahU_d-RfPAMr0fIPNY3FqBXWPIOxrz3pZn6f9z62s8" />	
+	{% if "/articles/" in request.path %}
+		{% block current_article %}
+		{% endblock %}
+	{% else %}	
+		<title> Ditook </title>	
+	{% endif %}	
+	{% block otherMetaTags %}		
+	{% endblock %}
+	<link rel="shortcut icon" href="/static/media/Images/ditook.png">			
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+	{% block cssFiles %}
+	{% endblock %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+	    google_ad_client: "ca-pub-5069135222867128",
+	    enable_page_level_ads: true
+	  });
+	</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129901912-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-129901912-1');
+	</script>
+</head>
+<body>    
+    <div class="noJs">    	
+		<!-- Navigational Bar -->
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">	
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" id="navbarToggle">
+				<span class="sr-only">Toggle navigation</span>
+				<span><i class="fa fa-ellipsis-v fa-2x"></i></span>	 
+			</button>						
+			<div class="container" id="responsiveContainer">
+					<!-- Title -->					
+					<div class="navbar-header pull-left site_header">
+						<a class="navbar-brand" href="{% url 'index' %}"><img id="navbar-logo" src="/static/media/Images/ditook.png"><p><strong>Dit</strong>ook</p></a>	
+					</div>
+					<div class="navbar-header pull-right">			        	
+			        	<ul class="nav navbar-nav navbar-right" id="nav">
+			        		<li>				        	
+					        	<form class="navbar-form navbar-center" id="navbarForm">
+					        		<div class="dropdown search_by">
+					        			<a href="#" id='search_by_trigger' class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></a>
+						        		<ul class="dropdown-menu">
+						        			<div id='search_by_pointer'></div>
+						        			<p> Search By</p>
+						        			<h6></h6>
+						        			<li id="search_by_article"> Article </li>
+						        			<li id="search_by_user"> User </li>
+						        		</ul>
+						        	</div>
+					        		<div class="form-group" id='nav-form'>
+					        			<input type="text" placeholder="Search Ditook" id="searchBox" class="form-control">						
+					        			<button id="search" type="submit" class="btn btn-default"><span>  <i class="fa fa-search"></i></span></button>
+					        		</div>	
+					        	</form>					        		
+					        </li>
+			        	</ul>			        				        				        	
+			        </div>			        			  			            
+					<div class="navbar-collapse collapse">
+						<div id='mobilePointer'></div>						
+			        	<ul class="nav navbar-nav navbar-right" id="nav">			        		
+			        		{% if request.user.is_authenticated %}			        		
+			        		<div class="inbox-holder">			        			
+        						<div class="inbox-header"><p class="badge inbox-new-notifications">new</p><b class="inbox-header-text"></b><p class="inbox-seen"><i class="fa fa-eye"></i> seen</p> <p class="inbox-clear"><i class="fa fa-trash-o"></i> clear</p><p class="inbox-select-all"><i class="fa fa-square-o"></i></p><p class="inbox-close">&#x2716;</p></div>
+	        					<ul class="list-unstyled inbox-container">			
+        						</ul>				        						
+	        				</div>
+			        		<li class="dropdown navMenu">			        					
+			        			<a href="#" id="userHeader" class="dropdown-toggle" data-toggle="dropdown">
+			        			<img class="img-circle" src="{{ request.user.profile.avatar_url|default_if_none:'/static/media/Images/userNavDp.png' }}"> <b>I am</b> <i class="fa fa-angle-down"></i></a>		
+			        			<ul class="dropdown-menu">
+			        				<div id='pointer'></div>
+			        				<div class="row">
+			        					<div class="col-xs-offset-1 col-xs-11 profileMenu">
+			        						<li><a href="{% url 'profile' %}" data-target="#" id="profileHeader"> {{ request.user.username|title }}</a></li>
+			        						<div class="row" id="notification_icons">			
+			        							<div class="col-xs-7">
+													{% if request.user.is_staff or request.user.is_superuser %}
+													<li class="super"> <i class="fa fa-circle"></i> <span> super </span> </li>									
+													{% else %}
+													<li class="amateur"> <i class="fa fa-circle-o"></i> <span> amateur</span> </li>									
+													{% endif %}				
+												</div>	
+					        					<div class="col-xs-pull-1">
+					        						<li><i class="fa fa-list-ul notification_icon"></i></li>
+					        					</div>					        			
+					        				</div>					        				
+					        			</div>
+			        				</div>
+			        				<div class="row">
+			        					<div class="col-xs-offset-2 col-xs-8"><hr style="height: 1px;background-color: rgb(80, 180, 180);"></div>	
+			        				</div>
+			        				<li><a href="{% url 'settings' %}" data-target="#" id="settingsHeader"><i class="fa fa-gear"></i> settings </a></li>		
+			        				<li><a href="{% url 'authenticate:Logout' %}" id="logout"><i class="fa fa-sign-out"></i> logout </a></li>
+			        			</ul>
+			        		</li>
+			        		{% else %}
+			        		<li class="dropdown auth_nav">			        			
+			        			<a href="#" id="authentication" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i> Authenticate </a>
+			        			<ul class="dropdown-menu">	
+			        				<div id='pointer'></div>	    
+			        				<li><a href="#" data-target="#signupModal" data-toggle="modal" id="signup"><i class="fa fa-user-plus"></i> Sign Up </a></li>
+			        				<li><a href="#" data-target="#loginModal" data-toggle="modal" id="signin"><i class="fa fa-sign-in"></i> Sign In </a></li>		
+			        			</ul>
+			        		</li>
+			        		{% endif %}
+			        	</ul>		        	
+			        	<ul class="nav navbar-nav navbar-left" id="nav">
+			        		<li id='Articles'><a href="{% url 'articles' %}"><i class="fa fa-list-alt"></i> Article </a></li>
+			        		<li id='Contact'><a href="{% url 'contact' %}"><i class="fa fa-phone"></i> Contact </a></li>
+			        	</ul>			        	
+			        </div>			         		        		        		        		
+			    </div>	
+		</nav>	
+		<a type="hidden" id="search_page" href="{% url 'search' %}"></a>
+		<!-- Login Modal -->
+		<div class="modal animated" id="loginModal" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-sm">				
+				<div class="modal-content">						        
+					<div class="modal-header">
+						<button class="close">&times;</button>
+						<h4 class="modal-title"> <i class="fa fa-sign-in fa-5x"></i></h4>
+					</div>
+					<form id='loginForm'>{% csrf_token %}
+					<div class="modal-body">
+						<div class="modalHeaderStyle">
+							 Login to <strong>Ditook</strong>
+						</div>												
+						<div class="form-group login_email">
+							<label for="inputLoginEmail"><i class="fa fa-user-o"></i> Email </label>
+							<input class="form-control" type="email" placeholder="&#xf040; Email" style="font-family:Arial, FontAwesome" id="inputLoginEmail" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+						</div>
+						<div class="form-group login_password">											
+							<label for="inputPassword"><i class="fa fa-key"></i> Password</label>
+							<div class="password-group">
+								<input class="form-control" type="password" placeholder="&#xf040; Password" style="font-family:Arial, FontAwesome" id="inputLoginPassword" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"><span class="show_password fa fa-eye"></span>
+							</div>
+							<p class="forgot-password">Forgot Password</p>
+						</div>								
+						<div class="row login-dilog-hr">
+							<div class="col-xs-5"> <hr style="height:2px;background-color:orange;"> </div>
+							<div class="col-xs-2" style="padding-top: 10px;"><strong> Or </strong></div>
+							<div class="col-xs-5"> <hr style="height:2px;background-color:orange;"> </div>
+						</div>							
+						<div class="row social_login">
+							<div class="col-xs-offset-3 col-xs-2"> 
+								<a id='fbLogin'><i class="fa fa-facebook fa-2x socialLoginStyle"></i></a> 
+							</div>
+							<div class="col-xs-2">
+								<a href="/accounts/linkedin/login"><i class="fa fa-linkedin fa-2x socialLoginStyle"></i></a> 
+							</div>							
+							<div class="col-xs-2">
+								<a href="/accounts/google/login"><i class="fa fa-google fa-2x socialLoginStyle"></i></a>
+							</div>															
+						</div> <br />
+						<div class="row create_account">
+							<div class="col-xs-offset-3">
+								<strong><button type="button" style="background-color: transparent; border:none;" id="registerUser"><a style="color: teal;">Create</a></button>an account.</strong>
+							</div>
+						</div>													
+					</div>
+					<div class="modal-footer" id="login-footer">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-xs-8"> <b id="showLoginErrMsg" class="errorMsg"></b> </div>
+								<div class="col-xs-4 col-sm-3"> <button type="submit" class="btn btn-default" id="login"> Login </button> </div>
+							</div>
+						</div>											
+					</div>
+					</form>				
+				</div>					
+			</div>
+		</div>
+		<!-- Signup Modal -->
+		<div class="modal animated" id="signupModal" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-sm">				
+				<div class="modal-content">		        					
+					<div class="modal-header">
+						<button class="close">&times;</button>
+						<h4 class="modal-title"><i class="fa fa-user-plus fa-5x"></i></h4>
+					</div>
+					<form id='registerForm'>{% csrf_token %}
+					<div class="modal-body">
+						<div class="modalHeaderStyle">
+							 Register to <strong>Ditook</strong> 
+						</div>
+							<div class="form-group">
+								<label for="inputEmail"><i class="fa fa-envelope"></i> Email </label>
+								<input class="form-control" type="email" placeholder="&#xf040; Email" style="font-family:Arial, FontAwesome" id="inputEmail" autocomplete="turn-off">
+							</div>
+							<div class="form-group">
+								<label for="inputUserName"><i class="fa fa-user-o"></i> Username</label>
+								<input class="form-control" type="text" placeholder="&#xf040; Username" style="font-family:Arial, FontAwesome" id="inputUsername" autocomplete="turn-off">
+							</div>
+							<div class="form-group">							
+								<label for="inputPassword"><i class="fa fa-key" class="alignIcon"></i> Password</label>
+								<div class="password-group">
+									<input class="form-control" type="password" placeholder="&#xf040; Password " style="font-family:Arial, FontAwesome" id="inputPassword"><span class="show_password fa fa-eye"></span>
+								</div>	
+							</div>
+							<div class="form-group">
+								<label for="inputConfirmPassword"><i class="fa fa-key"></i> Confirm Password</label>
+								<input class="form-control" type="password" placeholder="&#xf040; Confirm Password" style="font-family:Arial, FontAwesome" id="inputConfirmPassword">
+							</div>												
+					</div>
+					<div class="modal-footer" id="signup-footer">	
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-xs-8"> <b id="showRegisterErrMsg" class="errorMsg"></b> </div>
+								<div class="col-xs-4 col-sm-3"> <button type='submit' class="btn btn-default" id="register"> Register </button> </div>
+							</div>
+						</div>																			
+					</div>
+					</form>				
+				</div>	
+			</div>
+		</div> 				
+		<div class="main_page">
+			<!-- Jumbotron -->
+			<div class="container-fluid selection-section">						
+			<div class="row">		
+			{% if "/profile/" in request.path %}
+				{% block dashboard %}
+				{% endblock %}							
+			{% else %}
+				<div class="col-xs-6">
+					<div class="header-title">
+						{% block headerTitle %}							
+						{% endblock %}
+						{% if "/articles/" in request.path %}
+							{% block cur_category %}
+							{% endblock %}
+						{% else %}
+							<p class="subHeader"> <b> <i class="fa fa-minus"></i> <i class="fa fa-minus"></i> <i class="fa fa-minus"></i> </b></p>
+						{% endif %}
+					</div>						
+					<br />
+				</div>
+				<div class="col-xs-6">
+					<div class="quotation-board"> 
+						<p class="quotation"> <i class="fa fa-quote-left"></i> <b> {{quote.quote}} </b><i class="fa fa-quote-right"></i></p><p class="quotation-by"> - <b>{{quote.author}}</b> </p>		
+					</div>
+				</div>
+			{% endif %}	
+			</div>											
+			</div>		
+			<br />
+			<div class="alert alert-info notificationBox">
+					<div class="closeBtn"><button class="close">&nbsp; x</button></div>
+					<i></i><div class="msg"><strong></strong>&nbsp;&nbsp;<span></span></div>
+			</div>
+			{% if not "/profile/" in request.path and request.path != "/settings/" %}
+			<br /> <br />
+			<div class="container">
+				<ul class="breadcrumb">	  
+				</ul>
+			</div>			
+			<br />
+			<div class="container">
+				<div class="row">				
+					<div class="col-md-8 page_content">
+						{% block mainContent %}	
+						{% endblock %}
+					</div>
+					<br />		 
+					<div class="col-md-4">
+						<div id="categories">						
+							<div class="row sidebar_list_header">
+								<h2 class="sidebar-header-title" id="sidebar-title"> Categories </h2>
+								<hr class="sidebar-header-hr">											
+							</div>
+							<br />
+							{% if categories %}
+								{% for category in categories %}							
+								<div class="row">								
+									<div class="col-md-10 col-md-offset-2 col-xs-11 col-xs-offset-1">
+										<ul class="list-unstyled mb-0" id="sidebar-list">
+											<li>
+												<a href=""> {{ category }} </a>
+											</li>
+										</ul>						
+									</div>
+								</div>
+								{% endfor %}
+							{% endif %}
+						</div>													
+						<div id="popularposts">
+							<br /> <br />						
+							<div class="row sidebar_list_header">
+								<h2 class="sidebar-header-title"id="sidebar-title"> Popular Posts </h2>
+								<hr class="sidebar-header-hr">							
+							</div>	
+							<br />
+							{% if popular_posts %}
+								{% for popular_post in popular_posts %}
+								<div class="row">
+									<div class="col-md-10 col-md-offset-2 col-xs-11 col-xs-offset-1">
+										<ul class="list-unstyled mb-0" id="sidebar-list">
+											<li>
+												<a class="popular_posts_group" href="{% url 'articles' article_id=popular_post.id %}"> {{ popular_post.title }} </a>
+											</li>
+										</ul>						
+									</div>
+								</div>
+								{% endfor %}
+							{% endif %}
+						</div>	
+						<div id="latestposts">
+							<br /> <br />
+							<div class="row sidebar_list_header">
+								<h2 class="sidebar-header-title"id="sidebar-title"> Latest Posts </h2>
+								<hr class="sidebar-header-hr">
+							</div>	
+							<br />
+							{% if latest_posts %}
+								{% for latest_post in latest_posts %}
+								<div class="row">
+									<div class="col-md-10 col-md-offset-2 col-xs-11 col-xs-offset-1">
+										<ul class="list-unstyled mb-0" id="sidebar-list">
+											<li>
+												<a class="latest_posts_group" href="{% url 'articles' article_id=latest_post.id %}"> {{ latest_post.title }} </a>
+											</li>
+										</ul>						
+									</div>
+								</div>
+								{% endfor %}
+							{% endif %}						
+						</div>
+					</div>			
+				</div>
+			</div>
+	        {% else %}
+	        	{% block profileBody %}	
+				{% endblock %}
+	        {% endif %}  
+	        <button class="page_scroller"> <i class="fa fa-chevron-down"></i> </button>
+			<!-- Footer -->
+			<footer>
+				<div class="container-fluid" id="footerBody">			
+					<div class="row">
+						<div class="col-xs-4 resources">						
+							<h3 class="footerHeader"> Resources </h3>
+							<ul class="list-unstyled">								
+								<li> 
+									<a href="{% url 'About' %}"><i class="fa fa-info-circle">
+									<span> About</span></i></a> 
+								</li>
+								<li> 
+									<a href="{% url 'TermsAndConditions' %}"><i class="fa fa-handshake-o">
+									<span> Terms of use </span> </i> </a>
+								</li>
+								<li> 
+									<a href="{% url 'PrivacyPolicy' %}"><i class="fa fa-user-secret">
+									<span> Privacy policy </span> </i> </a>
+								</li>
+							</ul>																		
+						</div>
+						<div class="col-xs-4 follow">
+							<h3 class="footerHeader"> Follow </h3>
+							<ul class="list-unstyled">								
+								<li>
+									<a href="https://www.twitter.com/ditook1"><i class="fa fa-twitter">
+									<span> Twitter </span> </i> </a>
+								</li>
+								<li>
+									<a href="https://www.facebook.com/Ditook-2191029071182331"> <i class="fa fa-facebook"> 
+									<span> Facebook </span> </i> </a> 
+								</li>								
+								<li>
+									<a href="https://www.instagram.com/ditookweb"> <i  class="fa fa-instagram">
+									<span> Instagram </span> </i> </a>
+								</li>
+							</ul>																		
+						</div>
+						<div class="col-xs-4 briefDescrp">
+							<div>
+								<h3 class="footerHeader"> Brief Description </h3>
+								<hr>
+								<p class="description">  <strong> Di<span>took</span><strong> is a blog site which renders high content materials for educational purpose. </p>
+							</div>							
+						</div>					
+					</div>
+					<br />
+					<div class="row footerBottom">
+						<div class="col-xs-6">					
+							<strong> Copyright &copy; 2018 </strong>	
+						</div>
+						<div class="col-xs-6">
+							<div class="trademark">							
+								<strong> D</strong>ive 
+								<strong> I</strong>nto 
+								<strong> T</strong>he 
+								<strong> O</strong>cean 
+								<strong> O</strong>f 
+								<strong> K</strong>nowledge.
+								&nbsp;<i class="fa fa-trademark"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div class="main_page_end">				    
+	<input type="hidden" id="cur_user" value="{{ request.user.username }}" readonly>	
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/isInViewport.min.js' %}"></script>
+	<script src="{% static 'js/jquery.visible.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>	
+	<script type="text/javascript" src="{% static 'js/base.js' %}"></script>    
+	{% block scriptFiles %}
+	{% endblock %}
+  </div>
+<noscript>		 	
+		<style type="text/css">
+			.noJs { display: none; }			
+		</style>			 
+		{% include 'includes/jsDisabled.html' %}		
+</noscript>
+</body>
+</html>
