@@ -86,5 +86,5 @@ DATABASES['default'].update(db_from_env)
 
 ALLOWED_HOSTS = ['.herokuapp.com','https://ditook.herokuapp.com','www.ditook.com','ditook.com','45.120.149.226']
 
-MIDDLEWARE += ('whitenoise.middleware.WhiteNoiseMiddleware')
+MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedMainfestStaticFilesStorage'
