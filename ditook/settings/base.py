@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'Authentication.middleware.ActiveUserMiddleware',
     'Authentication.timezone_middleware.TimezoneMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 CACHES = {
