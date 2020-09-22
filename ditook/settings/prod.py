@@ -84,4 +84,4 @@ db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 #DATABASES['default']['CONN_MAX_AGE'] = 500
 
-ALLOWED_HOSTS = ['https://ditook.herokuapp.com','www.ditook.com','ditook.com','45.120.149.226']
+ALLOWED_HOSTS = ['.herokuapp.com','https://ditook.herokuapp.com','www.ditook.com','ditook.com','45.120.149.226']
