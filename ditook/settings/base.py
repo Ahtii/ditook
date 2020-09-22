@@ -167,8 +167,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
 MEDIA_URL = '/media/images/'
-
-if os.environ.get('DITOOK_VER') == 'production':
-  from .prod import *
-else:
-  from .dev import *  
